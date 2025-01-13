@@ -1,16 +1,29 @@
 import streamlit as st
 import numpy as np
-import os
 
-# Título de la página
-st.title("¡Hola neurona!")
+# Clase Neurona
+class Neuron:
+    def __init__(self, weights, bias, func):
+        self.weights = weights
+        self.bias = bias
+        self.func = func
 
-# Imagen de la neurona
-image_path = "img.png"
-if os.path.exists(image_path):
-    st.image(image_path, caption="Neurona", use_container_width=True)
-else:
-    st.error("La imagen 'img.png' no se encuentra en el directorio.")
+    def run(self, input_data):
+        result = sum(w * i for w, i in zip(self.weights, input_data)) + self.bias
+        if self.func == "ReLU":
+            return max(0, result)
+        elif self.func == "Sigmoide":
+            return 1 / (1 + np.exp(-result))
+        elif self.func == "Tangente hiperbólica":
+            return np.tanh(result)
+        return result
+
+    def change_bias(self, new_bias):
+        self.bias = new_bias
+
+# Configuración de la página
+st.set_page_config(page_title="Neurona Artificial", page_icon="🤖")
+st.title("Simulación de Neurona Artificial")
 
 # Control deslizante para el número de entradas/pesos
 n = st.slider("Elige el número de entradas/pesos que tendrá la neurona", min_value=1, max_value=10, value=2)
@@ -32,16 +45,9 @@ funcion_activacion = st.selectbox("Elige la función de activación", ["Sigmoide
 
 # Botón para calcular la salida
 if st.button("Calcular la salida"):
-    # Producto punto entre entradas y pesos
-    suma = np.dot(pesos, entradas) + sesgo
-
-    # Aplicar la función de activación
-    if funcion_activacion == "Sigmoide":
-        salida = 1 / (1 + np.exp(-suma))
-    elif funcion_activacion == "ReLU":
-        salida = max(0, suma)
-    elif funcion_activacion == "Tangente hiperbólica":
-        salida = np.tanh(suma)
+    # Crear la instancia de la clase Neurona
+    neurona = Neuron(weights=pesos, bias=sesgo, func=funcion_activacion)
+    salida = neurona.run(input_data=entradas)
 
     # Mostrar el resultado
     st.subheader("Salida de la neurona")
@@ -50,9 +56,6 @@ if st.button("Calcular la salida"):
 # Mostrar los valores actuales
 st.write("Pesos (w) =", pesos)
 st.write("Entradas (x) =", entradas)
-
-
-
 
 
 

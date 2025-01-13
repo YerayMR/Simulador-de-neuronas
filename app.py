@@ -29,21 +29,15 @@ st.title("Simulación de Neurona Artificial")
 n = st.slider("Elige el número de entradas/pesos que tendrá la neurona", min_value=1, max_value=10, value=2)
 
 # Contenedores para los pesos y las entradas
-col1, col2, col3 = st.columns(3)
+st.subheader("Pesos")
+pesos = [st.number_input(f"w_{i}", min_value=-100.0, max_value=100.0, step=0.01, value=0.0) for i in range(n)]
 
-with col1:
-    st.subheader("Pesos")
-    pesos = [st.number_input(f"w_{i}", min_value=-100.0, max_value=100.0, step=0.01, value=0.0) for i in range(n)]
+st.subheader("Entradas")
+entradas = [st.number_input(f"x_{i}", min_value=-100.0, max_value=100.0, step=0.01, value=0.0) for i in range(n)]
 
-with col2:
-    st.subheader("Entradas")
-    entradas = [st.number_input(f"x_{i}", min_value=-100.0, max_value=100.0, step=0.01, value=0.0) for i in range(n)]
-
-with col3:
-    st.subheader("Sesgo")
-    sesgo = st.number_input("Introduce el valor del sesgo", min_value=-100.0, max_value=100.0, step=0.01, value=0.0)
-    st.subheader("Función de activación")
-    funcion_activacion = st.selectbox("Elige la función de activación", ["Sigmoide", "ReLU", "Tangente hiperbólica"])
+st.subheader("Sesgo y Función de activación")
+sesgo = st.number_input("Introduce el valor del sesgo", min_value=-100.0, max_value=100.0, step=0.01, value=0.0)
+funcion_activacion = st.selectbox("Elige la función de activación", ["Sigmoide", "ReLU", "Tangente hiperbólica"])
 
 # Botón para calcular la salida
 if st.button("Calcular la salida"):

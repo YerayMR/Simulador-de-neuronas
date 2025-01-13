@@ -30,7 +30,8 @@ n = st.slider("Elige el número de entradas/pesos que tendrá la neurona", min_v
 
 # Contenedores para los pesos y las entradas
 st.subheader("Pesos")
-pesos = [st.number_input(f"w_{i}", min_value=-100.0, max_value=100.0, step=0.01, value=0.0) for i in range(n)]
+cols = st.columns(n)
+pesos = [cols[i].number_input(f"w_{i}", min_value=-100.0, max_value=100.0, step=0.01, value=0.0) for i in range(n)]
 
 st.subheader("Entradas")
 entradas = [st.number_input(f"x_{i}", min_value=-100.0, max_value=100.0, step=0.01, value=0.0) for i in range(n)]

@@ -30,12 +30,12 @@ n = st.slider("Elige el número de entradas/pesos que tendrá la neurona", min_v
 
 # Contenedores para los pesos y las entradas
 st.subheader("Pesos")
-cols = st.columns(n)
-pesos = [cols[i].number_input(f"w_{i}", min_value=-100.0, max_value=100.0, step=0.01, value=0.0) for i in range(n)]
+cols_pesos = st.columns(n)
+pesos = [cols_pesos[i].number_input(f"w_{i}", min_value=-100.0, max_value=100.0, step=0.01, value=0.0) for i in range(n)]
 
 st.subheader("Entradas")
-cols = st.columns(n)
-entradas = [st.number_input(f"x_{i}", min_value=-100.0, max_value=100.0, step=0.01, value=0.0) for i in range(n)]
+cols_entradas = st.columns(n)
+entradas = [cols_entradas[i].number_input(f"x_{i}", min_value=-100.0, max_value=100.0, step=0.01, value=0.0) for i in range(n)]
 
 st.subheader("Sesgo y Función de activación")
 sesgo = st.number_input("Introduce el valor del sesgo", min_value=-100.0, max_value=100.0, step=0.01, value=0.0)

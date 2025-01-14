@@ -25,17 +25,20 @@ class Neuron:
 st.set_page_config(page_title="Neurona Artificial", page_icon="🤖")
 st.title("Simulación de Neurona Artificial")
 
+# Presentación de la imagen
+st.image("img.png", caption="Diagrama de una neurona artificial")
+
 # Control deslizante para el número de entradas/pesos
 n = st.slider("Elige el número de entradas/pesos que tendrá la neurona", min_value=1, max_value=10, value=2)
 
 # Contenedores para los pesos y las entradas
 st.subheader("Pesos")
 cols_pesos = st.columns(n)
-pesos = [cols_pesos[i].number_input(f"w_{i}", min_value=-100.0, max_value=100.0, step=0.01, value=0.0) for i in range(n)]
+pesos = [cols_pesos[i].number_input(f"w_{i}", min_value=-100.0, max_value=100.0, step=0.01, value=1.0) for i in range(n)]
 
 st.subheader("Entradas")
 cols_entradas = st.columns(n)
-entradas = [cols_entradas[i].number_input(f"x_{i}", min_value=-100.0, max_value=100.0, step=0.01, value=0.0) for i in range(n)]
+entradas = [cols_entradas[i].number_input(f"x_{i}", min_value=-100.0, max_value=100.0, step=0.01, value=1.0) for i in range(n)]
 
 st.subheader("Sesgo y Función de activación")
 sesgo = st.number_input("Introduce el valor del sesgo", min_value=-100.0, max_value=100.0, step=0.01, value=0.0)
@@ -52,5 +55,5 @@ if st.button("Calcular la salida"):
     st.write(salida)
 
 # Mostrar los valores actuales
-st.write("Pesos (w) =", pesos)
-st.write("Entradas (x) =", entradas)
+# st.write("Pesos (w) =", pesos)
+# st.write("Entradas (x) =", entradas)
